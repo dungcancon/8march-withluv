@@ -112,16 +112,18 @@
     </div>
 
     <script>
+        // Mật khẩu gốc (Không mã hóa)
         const correctPassword = "Vu Ngoc Huong Giang".replace(/\s/g, "").toUpperCase();
         const inputContainer = document.getElementById("inputContainer");
         const loginContainer = document.getElementById("loginContainer");
         const messages = [
             "Ối giời, không đúng rồi! 😆",
-            "Sai rồi nhé 😜",
+            "Lại sai nữa à? 😜",
             "Đoán bừa hả? 😏",
-            "Chịu khó nghĩ mật khẩu đi nào! 🤣"
+            "Chịu khó nhớ mật khẩu đi nào! 🤣"
         ];
 
+        // Tạo đúng số ô nhập mật khẩu
         for (let i = 0; i < correctPassword.length; i++) {
             let input = document.createElement("input");
             input.type = "text";
@@ -143,7 +145,7 @@
             document.querySelectorAll("input").forEach(input => userInput += input.value.toUpperCase());
 
             if (userInput === correctPassword) {
-                loginContainer.classList.add("hide"); // Làm form biến mất nhanh hơn
+                loginContainer.classList.add("hide");
                 setTimeout(() => {
                     document.body.innerHTML = `
                         <div class="center-message">
@@ -152,11 +154,11 @@
                             Chúc em luôn xinh đẹp, rạng rỡ và hạnh phúc💖
                         </div>
                     `;
-                    startFlowerEffect();
-                }, 500); // Giảm thời gian chờ hoa rơi
+                    startFlowerEffect(); // 🌸 Hiệu ứng hoa rơi ngay khi hiện lời chúc
+                }, 500);
             } else {
                 loginContainer.classList.add("shake");
-                document.getElementById("message").textContent = messages[Math.floor(Math.random() * messages.length)]; // Chọn ngẫu nhiên câu trêu
+                document.getElementById("message").textContent = messages[Math.floor(Math.random() * messages.length)];
                 let inputs = document.querySelectorAll("input");
                 inputs.forEach(input => input.value = ""); // Xóa nội dung nhập sai
                 inputs[0].focus();
@@ -174,8 +176,19 @@
                 flower.style.animationTimingFunction = "ease-in-out";
                 document.body.appendChild(flower);
                 setTimeout(() => flower.remove(), 9000);
-            }, 400); // Tăng tốc hoa rơi ngay lập tức
+            }, 400); // 🌸 Hoa xuất hiện nhanh hơn
         }
+
+        // 🛑 Chặn F12, Ctrl+Shift+I, Ctrl+U, và chuột phải
+        document.addEventListener("contextmenu", (event) => event.preventDefault()); // Chặn chuột phải
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "F12" || 
+                (event.ctrlKey && event.shiftKey && event.key === "I") || 
+                (event.ctrlKey && event.key === "U")) {
+                event.preventDefault();
+                alert("Không được tò mò đâu nha! 😆");
+            }
+        });
     </script>
 </body>
 </html>
